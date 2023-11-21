@@ -38,26 +38,9 @@ function getName($email){
 
 function getPass($email){
   $conn = connect();
-  var_dump( mysqli_query($conn, 'SELECT password FROM users WHERE email = "'.$email.'"'));
   $rightPass = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT password FROM users WHERE email = "'.$email.'"'))['password'];
   disconnect($conn);
   return $rightPass;
-}
-
-function validLogin($email, $password, $errs){
-  $conn = connect();
-  disconnect($conn);
-  if (!emailExists($email)){
-    $errs[$email] = 'Er is geen account geassociëerd met dit e-mailadres.';
-    return $errs;
-  } else {
-    $rightPass = getPass($email);
-    if ($password == $rightPass){
-      return($errs);
-    }
-  }
-  $errs['password'] = 'Onjuist wachtwoord.';
-  return $errs;
 }
 
 function dataWrite($inputs){

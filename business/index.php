@@ -1,6 +1,6 @@
 <?php
 //First, the functions are all defined. 
-  $dir = 'C:/xampp/htdocs/educom-webshop-database-1700217655-main/educom-webshop-database-1700217655-main/';
+  $dir = 'C:/xampp/htdocs/educom-webshop-database-1700217655/';
   include('getRequestedPage.php');
   include($dir.'presentation/showResponsePage.php');
   include($dir.'data/dataRead.php');
