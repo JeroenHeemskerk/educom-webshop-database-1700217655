@@ -22,6 +22,9 @@ function showHeader($page, $id){
     case 'shop':
       echo '<h1 class="title">Webshop</h1>';
       break;
+    case 'cart':
+      echo '<h1 class="title">Winkelwagen</h1>';
+      break;
     case 'details':
       switch($id){
         case 1:

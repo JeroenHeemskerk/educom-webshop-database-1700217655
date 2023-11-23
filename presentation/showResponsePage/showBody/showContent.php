@@ -9,6 +9,7 @@ include ('showContent/showLoginContent.php');
 include ('showContent/showThanks.php');
 include ('showContent/showShopContent.php');
 include ('showContent/showDetailsContent.php');
+include ('showContent/showCartContent.php');
 
 
 function showContent($page, $inputs, $errs){
@@ -36,6 +37,9 @@ function showContent($page, $inputs, $errs){
       break;
     case 'details':
       showDetailsContent($inputs['id']);
+      break;
+    case 'cart':
+      showCartContent();
       break;
     default:
       show404Content();

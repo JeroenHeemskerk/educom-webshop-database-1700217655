@@ -8,13 +8,14 @@ function showMenu(){
   showMenuItem('contact', 'CONTACT');
   showMenuItem('shop', 'SHOP');
   if (isset($_SESSION['user'])){
+    showMenuItem('cart',  'CART');
     showMenuItem('logout', 'LOGOUT '.$_SESSION['user']);
   } else {
     showMenuItem('register', 'REGISTER');
     showMenuItem('login', 'LOGIN');
   }
-  if (!empty($_SESSION['badeendje']) | !empty($_SESSION['kaas']) | !empty($_SESSION['auto']) 
-      | !empty($_SESSION['citroen']) | !empty($_SESSION['banaan'])){
+  if (!empty($_SESSION['cart']['1']) | !empty($_SESSION['cart']['2']) | !empty($_SESSION['cart']['3']) 
+      | !empty($_SESSION['cart']['4']) | !empty($_SESSION['cart']['5'])){
         showMenuItem('cart', 'SHOPPING CART');
         echo '</ul>';
       }

@@ -20,8 +20,14 @@ function showTitle($page){
     case 'thanks':
       echo '<title>Bedankt!</title>';
       break;
+    case 'shop':
+      echo '<title>Shop</title>';
+      break;
     case 'details':
       echo '<title>Details</title>';
+      break;
+    case 'cart':
+      echo '<title>Winkelwagen</title>';
       break;
     default:
       echo '<title>404</title>';
