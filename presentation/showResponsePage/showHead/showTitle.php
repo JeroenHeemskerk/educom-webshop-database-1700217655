@@ -20,6 +20,9 @@ function showTitle($page){
     case 'thanks':
       echo '<title>Bedankt!</title>';
       break;
+    case 'details':
+      echo '<title>Details</title>';
+      break;
     default:
       echo '<title>404</title>';
   }

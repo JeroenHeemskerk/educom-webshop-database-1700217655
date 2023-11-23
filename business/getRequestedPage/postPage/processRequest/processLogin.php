@@ -8,6 +8,9 @@ function processLogin($inputs, $errs){
   if (empty($errs['email']) && empty($errs['password'])){
     $errs = validLogin($inputs['email'], $inputs['password'], $errs);
   }
+  if (empty($errs['email']) && empty($errs['password'])){
+    $_SESSION['user'] = getName($inputs['email']);
+  }
   return($errs);
 }
 

@@ -4,6 +4,18 @@ h1.title{
 	font-size: 48px;
 }
 
+h3.name{
+  color:blue;
+}
+
+h4.id{
+  color:blue;
+}
+
+h4.price{
+  color:blue;
+}
+
 ul.menu{
 	list-style-type: none;
 }

@@ -12,6 +12,9 @@ function postPage(){
   list($inputs, $errs) = processRequest($errs, $inputs, $pageTemp);
   $valid = false;
   list($page, $valid) = validate($valid, $errs, $pageTemp, $inputs);
+  if (!isset($inputs['id'])){
+    $inputs['id']= '';
+  }
   return(array($page, $inputs, $errs));
 }
 ?>

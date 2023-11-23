@@ -43,10 +43,17 @@ function getPass($email){
   return $rightPass;
 }
 
-function dataWrite($inputs){
+function dataWrite($email, $name, $password){
   $conn = connect();
   mysqli_query($conn, 'INSERT INTO users (email, name, password) VALUES("'.$inputs['email'].'", "'.$inputs['name'].'", "'.$inputs['password'].'")');
   disconnect($conn);
+}
+
+function getProductInfo($id){
+  $conn = connect();
+  $productInfo = mysqli_fetch_array(mysqli_query($conn, 'SELECT * FROM products WHERE id = '.$id));
+  disconnect($conn);
+  return $productInfo;
 }
       
 ?>
