@@ -1,7 +1,7 @@
 <?php
 
 include('showCartItem.php');
-//include('showTotal.php');
+include('showTotal.php');
 
 function showCartContent(){
   $total = 0;
@@ -10,11 +10,11 @@ function showCartContent(){
       $number = $_SESSION['cart'][strval($x)];
       if ($number > 0 ){
         $productInfo = getProductInfo($x);
-        showCartItem($productInfo, $number);
+        $total += showCartItem($productInfo, $number);
       }
     }
   }
-  //showTotal($total);
+  showTotal($total);
 }
 
 
