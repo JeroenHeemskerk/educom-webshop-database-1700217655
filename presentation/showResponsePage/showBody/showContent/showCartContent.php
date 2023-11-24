@@ -2,6 +2,7 @@
 
 include('showCartItem.php');
 include('showTotal.php');
+include('showCheckoutButton.php');
 
 function showCartContent(){
   $total = 0;
@@ -15,7 +16,11 @@ function showCartContent(){
     }
   }
   showTotal($total);
+  if ($total != 0){
+  showCheckoutButton();
 }
+}
+
 
 
 ?>

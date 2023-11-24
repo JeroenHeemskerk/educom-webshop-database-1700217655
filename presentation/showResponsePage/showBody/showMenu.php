@@ -9,13 +9,12 @@ function showMenu(){
   showMenuItem('shop', 'SHOP');
   if (isset($_SESSION['user'])){
     showMenuItem('cart',  'CART');
-    showMenuItem('logout', 'LOGOUT '.$_SESSION['user']);
+    showMenuItem('logout', 'LOGOUT '.$_SESSION['user']['name']);
   } else {
     showMenuItem('register', 'REGISTER');
     showMenuItem('login', 'LOGIN');
   }
-  if (!empty($_SESSION['cart']['1']) | !empty($_SESSION['cart']['2']) | !empty($_SESSION['cart']['3']) 
-      | !empty($_SESSION['cart']['4']) | !empty($_SESSION['cart']['5'])){
+  if (!empty($_SESSION['cart'])){
         showMenuItem('cart', 'SHOPPING CART');
         echo '</ul>';
       }

@@ -43,9 +43,16 @@ function getPass($email){
   return $rightPass;
 }
 
+function getID($email){
+  $conn = connect();
+  $id = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT id FROM users WHERE email = "'.$email.'"'))['id'];
+  disconnect($conn);
+  return $id;
+}
+
 function dataWrite($email, $name, $password){
   $conn = connect();
-  mysqli_query($conn, 'INSERT INTO users (email, name, password) VALUES("'.$inputs['email'].'", "'.$inputs['name'].'", "'.$inputs['password'].'")');
+  mysqli_query($conn, 'INSERT INTO users (email, name, password) VALUES("'.$email.'", "'.$name.'", "'.$password.'")');
   disconnect($conn);
 }
 
@@ -54,6 +61,22 @@ function getProductInfo($id){
   $productInfo = mysqli_fetch_array(mysqli_query($conn, 'SELECT * FROM products WHERE id = '.$id));
   disconnect($conn);
   return $productInfo;
+}
+
+function placeOrder($user, $cart){
+  $conn = connect();
+  mysqli_query($conn, 'INSERT INTO orders (user_id) VALUES("'. $user['id']. '")');
+  $orderInfo = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT id FROM orders WHERE id = (SELECT MAX(id) FROM orders)'));
+  $id = $orderInfo['id'];
+  disconnect($conn);
+  return($id);
+}
+
+function placeOrderLine($productID, $number, $orderID){
+  $conn = connect();
+  mysqli_query($conn, 'INSERT INTO order_lines (order_id, product_id,  count) VALUES("'. $orderID.'", "'
+              .$productID.'", "'.$number.'")');
+  disconnect($conn);
 }
       
 ?>

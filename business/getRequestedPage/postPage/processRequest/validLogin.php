@@ -7,7 +7,8 @@ function validLogin($email, $password, $errs){
   } else {
     $rightPass = getPass($email);
     if ($password == $rightPass){
-      return($errs);
+      $id = getID($email);
+      return(array($errs, $id));
     }
   }
   $errs['password'] = 'Onjuist wachtwoord.';

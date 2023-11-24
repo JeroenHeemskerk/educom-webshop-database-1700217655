@@ -7,7 +7,7 @@ function validate($valid, $errs, $page, $inputs){
         $page = 'thanks';
         break;
       case 'register':
-        dataWrite($inputs);
+        dataWrite($inputs['email'], $inputs['name'], $inputs['password']);
         $page = 'login';
         break;
       case 'login':

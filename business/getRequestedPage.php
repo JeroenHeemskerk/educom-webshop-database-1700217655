@@ -17,6 +17,7 @@ function getRequestedPage(){
       $inputs['id']= $id;
       $inputs['inCart'] = $inCart;
       $errs = initErrs($page);
+      var_dump($page);
       return array($page, $inputs, $errs);
     }    
   }
