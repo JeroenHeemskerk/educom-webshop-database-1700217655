@@ -70,19 +70,29 @@ function dataWrite($email, $name, $password){
   disconnect($conn);
 }
 
-function placeOrder($user, $cart){
-  $conn = connect();
+function placeOrder($user, $cart, $conn){
   mysqli_query($conn, 'INSERT INTO orders (user_id) VALUES("'. $user['id']. '")');
   $orderInfo = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT id FROM orders WHERE id = (SELECT MAX(id) FROM orders)'));
   $id = $orderInfo['id'];
-  disconnect($conn);
   return($id);
 }
 
-function placeOrderLine($productID, $number, $orderID){
-  $conn = connect();
+function placeOrderLine($productID, $number, $orderID, $conn){
   mysqli_query($conn, 'INSERT INTO order_lines (order_id, product_id,  count) VALUES("'. $orderID.'", "'
               .$productID.'", "'.$number.'")');
+}
+
+function checkout(){
+  $conn = connect();
+  $id = placeOrder($_SESSION['user'], $_SESSION['cart'], $conn);
+  foreach ($_SESSION['cart'] as $key => $value)
+  {
+    if ($value > 0)
+    {
+      placeOrderLine($key, $value, $id, $conn);
+    }
+  }
+  $_SESSION['cart'] = array();
   disconnect($conn);
 }
       
