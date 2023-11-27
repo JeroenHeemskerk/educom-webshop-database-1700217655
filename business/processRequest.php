@@ -150,18 +150,6 @@ function addToCart($id){
   $_SESSION['cart'][$id] += 1;
 }
 
-function checkout(){
-  $id = placeOrder($_SESSION['user'], $_SESSION['cart']);
-    foreach ($_SESSION['cart'] as $key => $value)
-    {
-      if ($value > 0)
-      {
-        placeOrderLine($key, $value, $id);
-      }
-    }
-    $_SESSION['cart'] = array();
-}
-
 function logout(){
   unset($_SESSION['user']);
   if (isset($_SESSION['cart'])){

@@ -71,14 +71,14 @@ function dataWrite($email, $name, $password){
 }
 
 function placeOrder($user, $cart, $conn){
-  mysqli_query($conn, 'INSERT INTO orders (user_id) VALUES("'. $user['id']. '")');
+  mysqli_query($conn, 'INSERT INTO orders (user_id, order_date) VALUES("'. $user['id']. '", CURDATE())');
   $orderInfo = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT id FROM orders WHERE id = (SELECT MAX(id) FROM orders)'));
   $id = $orderInfo['id'];
   return($id);
 }
 
 function placeOrderLine($productID, $number, $orderID, $conn){
-  mysqli_query($conn, 'INSERT INTO order_lines (order_id, product_id,  count) VALUES("'. $orderID.'", "'
+  mysqli_query($conn, 'INSERT INTO order_lines (order_id, product_id, number_ordered) VALUES("'. $orderID.'", "'
               .$productID.'", "'.$number.'")');
 }
 
@@ -94,6 +94,18 @@ function checkout(){
   }
   $_SESSION['cart'] = array();
   disconnect($conn);
+}
+
+function getTop5(){
+  $conn = connect();
+  $orderList = array('1' => '', '2' => '', '3' => '', '4' => '', '5' => '');
+  for ($x = 1; $x!==6; $x++){
+    $orderlist[$x] = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT SUM(number_ordered) from order_lines WHERE 
+    order_id = (SELECT id FROM orders WHERE order_date BETWEEN ADDDATE(CURDATE(), -5) and CURDATE()) and product_id = '.$x));
+  }
+  var_dump($orderList);
+  disconnect($conn);
+  //return $orderList;
 }
       
 ?>

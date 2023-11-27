@@ -67,7 +67,7 @@ CREATE TABLE `order_lines` (
 -- Dumping data for table `order_lines`
 --
 
-INSERT INTO `order_lines` (`id`, `order_id`, `product_id`, `count`) VALUES
+INSERT INTO `order_lines` (`id`, `order_id`, `product_id`, `number_ordered`) VALUES
 (1, 11, 5, 1),
 (2, 12, 5, 1),
 (3, 12, 2, 2);

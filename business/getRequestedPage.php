@@ -5,15 +5,19 @@ function getRequestedPage(){
 	  {
       return(postPage());
 	  } else {
-      list($page, $logout, $id, $inCart) = getPage();
-      if( $logout == true){
+      $vars = getPage();
+      var_dump($vars);
+      if( $vars['logout'] == true){
         logout();
       }
-      $inputs = initInputs($page);
-      $inputs['id']= $id;
-      $inputs['inCart'] = $inCart;
-      $errs = initErrs($page);
-      return array($page, $inputs, $errs);
+      $inputs = initInputs($vars['page']);
+      $inputs['id']= $vars['id'];
+      $inputs['inCart'] = $vars['inCart'];
+      //if ($vars['page'] == 'top5'){
+      //  $inputs['order'] = $vars['order'];
+      //}
+      $errs = initErrs($vars['page']);
+      return array($vars['page'], $inputs, $errs);
     }    
   }
 
@@ -31,26 +35,30 @@ function getRequestedPage(){
   }
 
   function getPage(){
-    $page = getUrlVar('page', 'home');
-    if ($page == 'cart' && isset($_GET['checkout'])){
-      $checkout = getUrlVar('checkout', 'false');
+    $vars = array();
+    $vars['page'] = getUrlVar('page', 'home');
+    if ($vars['page'] == 'cart' && isset($_GET['checkout'])){
+      $vars['checkout'] = getUrlVar('checkout', 'false');
     }
-    $id = strval(getUrlVar('id', '0'));
-    $inCart = getUrlVar('inCart', false);
-    if (isset($checkout)){
-      checkout($id);
+    if ($vars['page'] == 'top5'){
+      getTop5();
     }
-    if (!isset($_SESSION['cart'][$id])){
-      $_SESSION['cart'][$id] = 0;
+    $vars['id'] = strval(getUrlVar('id', '0'));
+    $vars['inCart'] = getUrlVar('inCart', false);
+    if (isset($vars['checkout'])){
+      checkout($vars['id']);
     }
-    if ($inCart){
-      addToCart($id);
+    if (!isset($_SESSION['cart'][$vars['id']])){
+      $_SESSION['cart'][$vars['id']] = 0;
     }
-    $logout = false;
-    if($page == 'logout'){
-      $logout = true;
-      $page = 'home';
+    if ($vars['inCart']){
+      addToCart($vars['id']);
     }
-    return array($page, $logout, $id, $inCart);
+    $vars['logout'] = false;
+    if($vars['page'] == 'logout'){
+      $vars['logout'] = true;
+      $vars['page'] = 'home';
+    }
+    return $vars;
   }
 ?>

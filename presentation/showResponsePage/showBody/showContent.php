@@ -10,6 +10,7 @@ include ('showContent/showThanks.php');
 include ('showContent/showShopContent.php');
 include ('showContent/showDetailsContent.php');
 include ('showContent/showCartContent.php');
+include ('showContent/showTop5Content.php');
 
 
 function showContent($page, $inputs, $errs){
@@ -40,6 +41,9 @@ function showContent($page, $inputs, $errs){
       break;
     case 'cart':
       showCartContent();
+      break;
+    case 'Top5':
+      showTop5Content($inputs['order']);
       break;
     default:
       show404Content();

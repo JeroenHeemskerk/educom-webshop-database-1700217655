@@ -7,6 +7,7 @@ function showMenu(){
   showMenuItem('about', 'ABOUT');
   showMenuItem('contact', 'CONTACT');
   showMenuItem('shop', 'SHOP');
+  showMenuItem('top5', 'TOP 5 PAGE');
   if (isset($_SESSION['user'])){
     showMenuItem('logout', 'LOGOUT '.$_SESSION['user']['name']);
   } else {
