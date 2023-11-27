@@ -20,6 +20,7 @@ function disconnect($conn){
       
 function emailExists($email){
   $conn = connect();
+  $email = mysqli_real_escape_string($conn, $email);
   $emails = mysqli_query($conn, 'SELECT email FROM users WHERE email = "'.$email.'"');
   $exists = false;
   if (mysqli_fetch_assoc($emails) !== NULL){
@@ -31,6 +32,7 @@ function emailExists($email){
 
 function getName($email){
   $conn = connect();
+  $email = mysqli_real_escape_string($conn, $email);
   $name = mysqli_query($conn, 'SELECT name FROM users WHERE email = "'.$email.'"');
   disconnect($conn);
   return mysqli_fetch_assoc($name)['name'];
@@ -38,6 +40,7 @@ function getName($email){
 
 function getPass($email){
   $conn = connect();
+  $email = mysqli_real_escape_string($conn, $email);
   $rightPass = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT password FROM users WHERE email = "'.$email.'"'))['password'];
   disconnect($conn);
   return $rightPass;
@@ -45,15 +48,10 @@ function getPass($email){
 
 function getID($email){
   $conn = connect();
+  $email = mysqli_real_escape_string($conn, $email);
   $id = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT id FROM users WHERE email = "'.$email.'"'))['id'];
   disconnect($conn);
   return $id;
-}
-
-function dataWrite($email, $name, $password){
-  $conn = connect();
-  mysqli_query($conn, 'INSERT INTO users (email, name, password) VALUES("'.$email.'", "'.$name.'", "'.$password.'")');
-  disconnect($conn);
 }
 
 function getProductInfo($id){
@@ -61,6 +59,15 @@ function getProductInfo($id){
   $productInfo = mysqli_fetch_array(mysqli_query($conn, 'SELECT * FROM products WHERE id = '.$id));
   disconnect($conn);
   return $productInfo;
+}
+
+function dataWrite($email, $name, $password){
+  $conn = connect();
+  $email = mysqli_real_escape_string($conn, $email);
+  $name = mysqli_real_escape_string($conn, $name);
+  $password = mysqli_real_escape_string($conn, $password);
+  mysqli_query($conn, 'INSERT INTO users (email, name, password) VALUES("'.$email.'", "'.$name.'", "'.$password.'")');
+  disconnect($conn);
 }
 
 function placeOrder($user, $cart){

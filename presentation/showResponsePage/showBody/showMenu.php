@@ -8,7 +8,6 @@ function showMenu(){
   showMenuItem('contact', 'CONTACT');
   showMenuItem('shop', 'SHOP');
   if (isset($_SESSION['user'])){
-    showMenuItem('cart',  'CART');
     showMenuItem('logout', 'LOGOUT '.$_SESSION['user']['name']);
   } else {
     showMenuItem('register', 'REGISTER');

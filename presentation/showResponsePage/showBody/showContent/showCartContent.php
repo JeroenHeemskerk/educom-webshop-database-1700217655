@@ -1,8 +1,8 @@
 <?php
 
-include('showCartItem.php');
-include('showTotal.php');
-include('showCheckoutButton.php');
+include('showCartContent/showCartItem.php');
+include('showCartContent/showTotal.php');
+include('showCartContent/showCheckoutButton.php');
 
 function showCartContent(){
   $total = 0;
