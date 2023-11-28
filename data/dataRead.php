@@ -96,16 +96,16 @@ function checkout(){
   disconnect($conn);
 }
 
-function getTop5(){
+function getNumbersOrdered(){
   $conn = connect();
-  $orderList = array('1' => '', '2' => '', '3' => '', '4' => '', '5' => '');
+  $orderList = array();
   for ($x = 1; $x!==6; $x++){
-    $orderlist[$x] = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT SUM(number_ordered) from order_lines WHERE 
-    order_id = (SELECT id FROM orders WHERE order_date BETWEEN ADDDATE(CURDATE(), -5) and CURDATE()) and product_id = '.$x));
+    $orderList[$x] = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT SUM(number_ordered) from order_lines WHERE 
+    order_id IN (SELECT id FROM orders WHERE order_date BETWEEN ADDDATE(CURDATE(), -5) and CURDATE()) and product_id = '.$x))
+    ["SUM(number_ordered)"];
   }
-  var_dump($orderList);
   disconnect($conn);
-  //return $orderList;
+  return $orderList;
 }
       
 ?>

@@ -42,7 +42,7 @@ function showContent($page, $inputs, $errs){
     case 'cart':
       showCartContent();
       break;
-    case 'Top5':
+    case 'top5':
       showTop5Content($inputs['order']);
       break;
     default:

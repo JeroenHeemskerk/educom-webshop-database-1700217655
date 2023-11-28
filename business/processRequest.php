@@ -171,5 +171,4 @@ function getUrlVar($varName, $default){
   }
 }
 
-
 ?>

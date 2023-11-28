@@ -6,16 +6,15 @@ function getRequestedPage(){
       return(postPage());
 	  } else {
       $vars = getPage();
-      var_dump($vars);
       if( $vars['logout'] == true){
         logout();
       }
       $inputs = initInputs($vars['page']);
       $inputs['id']= $vars['id'];
       $inputs['inCart'] = $vars['inCart'];
-      //if ($vars['page'] == 'top5'){
-      //  $inputs['order'] = $vars['order'];
-      //}
+      if ($vars['page'] == 'top5'){
+        $inputs['order'] = $vars['sortedList'];
+      }
       $errs = initErrs($vars['page']);
       return array($vars['page'], $inputs, $errs);
     }    
@@ -41,7 +40,9 @@ function getRequestedPage(){
       $vars['checkout'] = getUrlVar('checkout', 'false');
     }
     if ($vars['page'] == 'top5'){
-      getTop5();
+      $numberOrdered = getNumbersOrdered();
+      arsort($numberOrdered);
+      $vars['sortedList'] = $numberOrdered;
     }
     $vars['id'] = strval(getUrlVar('id', '0'));
     $vars['inCart'] = getUrlVar('inCart', false);

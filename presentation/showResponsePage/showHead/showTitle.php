@@ -29,6 +29,9 @@ function showTitle($page){
     case 'cart':
       echo '<title>Winkelwagen</title>';
       break;
+    case 'top5':
+      echo '<title>Top 5</title>';
+      break;
     default:
       echo '<title>404</title>';
   }

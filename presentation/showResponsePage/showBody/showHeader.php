@@ -44,6 +44,9 @@ function showHeader($page, $id){
           break;
       }
       break;
+    case 'top5':
+      echo '<h1 class="title">Top 5</h1>';
+      break;
     default:
       echo '<h1 class="title">Error 404:</h1>';
   }
